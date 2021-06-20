@@ -1,0 +1,43 @@
+<h1 mat-dialog-title>{{data ? 'Edit Item': 'Add Item'}}</h1>
+<div mat-dialog-content>
+  <form [formGroup]="masterFormGroup" class="container-fluid" novalidate>
+    <div>
+      <mat-form-field style="width: 100%">
+        <mat-select multiple formControlName="itemsArray" placeholder="Select type" required>
+          <mat-option *ngFor="let type of jsonArray" [value]="type">{{type.foodName}}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="masterFormGroup.get('itemsArray').invalid">
+          Please select valid items</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div *ngFor="let item of masterFormGroup.get('itemsArray').value;let i=index">
+      <div fxLayout="row" fxLayoutGap="50px">
+        <mat-form-field>
+          <input type="text" matInput placeholder="Food Name" [(ngModel)]="item.foodName" readonly
+            [ngModelOptions]="{standalone: true}">
+        </mat-form-field>
+        <mat-form-field>
+          <input type="text" pattern="^[1-9][0-9]*$" matInput placeholder="Quantity" [(ngModel)]="item.qty"
+            [ngModelOptions]="{standalone: true}">
+        </mat-form-field>
+        <!-- <mat-radio-group [(ngModel)]="item.type">
+          <mat-radio-button value="0" class="tw-mr-8">Half</mat-radio-button>
+          <mat-radio-button value="1">Full</mat-radio-button>
+        </mat-radio-group> -->
+      </div>
+    </div>
+
+  </form>
+
+</div>
+<div mat-dialog-actions class="right">
+  <button mat-raised-button (click)="addItem()">
+    <mat-icon>save</mat-icon>
+    <span>Add Order</span>
+  </button>
+  <button mat-raised-button type="button" (click)="closeForm(true)">
+    <mat-icon>clear</mat-icon>
+    <span>Cancel</span>
+  </button>
+</div>

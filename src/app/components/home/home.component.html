@@ -1,0 +1,34 @@
+<!-- <center> -->
+<div class="home-container">
+  <div class="main-container">
+    <mat-toolbar color="primary">
+      <span>Home</span>
+      <span class="example-spacer"></span>
+    </mat-toolbar>
+    <div class="main-div">
+      <div class="btn-div">
+        <button mat-button class="add-btn" (click)="addNew()">Add Order</button>
+      </div>
+      <div fxLayout="row row-wrap">
+        <div *ngFor="let item of jsonArray; let i=index" fxFlex="33">
+          <mat-card class="card">
+            <div>
+              <div fxLayout="row">
+                <h3>{{item.foodName}}</h3>
+                <div class="veg-type-div" *ngIf="item.type == 0" matTooltip="Veg">
+                  <mat-icon style="color: green;">circle</mat-icon>
+                </div>
+                <div class="nonveg-type-div" *ngIf="item.type == 1" matTooltip="Non-Veg">
+                  <mat-icon style="color: red;">circle</mat-icon>
+                </div>
+              </div>
+              <div class="colorGray">
+                Price : {{item.price}}
+              </div>
+            </div>
+          </mat-card>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
