@@ -28,26 +28,26 @@ export class HomeComponent implements OnInit {
     });
     dialog.afterClosed().subscribe(res => {
       console.log("res", res);
-      if (res.data !== true) {
-        let localArray = []
-        for (let index = 0; index < res.data.itemsArray.length; index++) {
-          const element = res.data.itemsArray[index];
-          localArray.push({
-            "id": element.id,
-            "foodName": element.foodName,
-            "qty": element.qty,
-            "price": element.price
-          })
-        }
-        this.apiService.addOrder(localArray).subscribe(response => {
-          this.snackBar.open("Order added successfully", '', {
-            duration: 2000,
-          });
-          this.getProducts()
-        })
-      } else {
-        console.log("normal close");
-      }
+      // if (res.data !== true) {
+      //   let localArray = []
+      //   for (let index = 0; index < res.data.itemsArray.length; index++) {
+      //     const element = res.data.itemsArray[index];
+      //     localArray.push({
+      //       "id": element.id,
+      //       "foodName": element.foodName,
+      //       "qty": element.qty,
+      //       "price": element.price
+      //     })
+      //   }
+      //   this.apiService.addOrder(localArray).subscribe(response => {
+      //     this.snackBar.open("Order added successfully", '', {
+      //       duration: 2000,
+      //     });
+      //     this.getProducts()
+      //   })
+      // } else {
+      //   console.log("normal close");
+      // }
     })
   }
 

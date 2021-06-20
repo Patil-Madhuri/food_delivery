@@ -1,7 +1,13 @@
-<h1 mat-dialog-title>{{data ? 'Edit Item': 'Add Item'}}</h1>
+<h1 mat-dialog-title>Order</h1>
 <div mat-dialog-content>
-  <form [formGroup]="masterFormGroup" class="container-fluid" novalidate>
+  <form [formGroup]="masterFormGroup" class="container-fluid" novalidate *ngIf="!showOrderDetail">
     <div>
+      <mat-radio-group [(ngModel)]="typeOffood" [ngModelOptions]="{standalone: true}"
+        (change)="getProducts($event.value)">
+        <mat-radio-button value="1" class="mr-8">Veg</mat-radio-button>
+        <mat-radio-button value="2">Non Veg</mat-radio-button>
+      </mat-radio-group>
+
       <mat-form-field style="width: 100%">
         <mat-select multiple formControlName="itemsArray" placeholder="Select type" required>
           <mat-option *ngFor="let type of jsonArray" [value]="type">{{type.foodName}}</mat-option>
@@ -12,31 +18,47 @@
     </div>
 
     <div *ngFor="let item of masterFormGroup.get('itemsArray').value;let i=index">
-      <div fxLayout="row" fxLayoutGap="50px">
+      <div fxLayout="row" fxLayoutGap="50px" style="align-items: center;">
         <mat-form-field>
           <input type="text" matInput placeholder="Food Name" [(ngModel)]="item.foodName" readonly
             [ngModelOptions]="{standalone: true}">
         </mat-form-field>
-        <mat-form-field>
-          <input type="text" pattern="^[1-9][0-9]*$" matInput placeholder="Quantity" [(ngModel)]="item.qty"
-            [ngModelOptions]="{standalone: true}">
-        </mat-form-field>
-        <!-- <mat-radio-group [(ngModel)]="item.type">
-          <mat-radio-button value="0" class="tw-mr-8">Half</mat-radio-button>
-          <mat-radio-button value="1">Full</mat-radio-button>
-        </mat-radio-group> -->
+        <mat-radio-group [(ngModel)]="item.qty" [ngModelOptions]="{standalone: true}">
+          <mat-radio-button value="1" class="mr-8">Half</mat-radio-button>
+          <mat-radio-button value="2">Full</mat-radio-button>
+        </mat-radio-group>
       </div>
     </div>
-
   </form>
 
+  <div *ngIf="showOrderDetail">
+    <table style="width: 100%;">
+      <thead>
+        <th>Item</th>
+        <th>Quantity</th>
+        <th>Price</th>
+      </thead>
+      <tbody style="text-align: center;">
+        <tr *ngFor="let prod of masterFormGroup.get('itemsArray').value">
+          <td style="padding: 8px;">{{prod.foodName}}</td>
+          <td style="padding: 8px;">{{prod.qty}}</td>
+          <td style="padding: 8px;">{{ prod.qty == '1' ? prod.price / 2 :prod.price }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="total">Total: {{returnTotal()}}</div>
+  </div>
 </div>
 <div mat-dialog-actions class="right">
-  <button mat-raised-button (click)="addItem()">
+  <button mat-raised-button (click)="addItem()" *ngIf="!showOrderDetail">
     <mat-icon>save</mat-icon>
     <span>Add Order</span>
   </button>
-  <button mat-raised-button type="button" (click)="closeForm(true)">
+  <button mat-raised-button (click)="billpaid()" *ngIf="showOrderDetail">
+    <mat-icon>attach_money</mat-icon>
+    <span>Pay</span>
+  </button>
+  <button mat-raised-button type="button" (click)="closeForm(true)" *ngIf="!showOrderDetail">
     <mat-icon>clear</mat-icon>
     <span>Cancel</span>
   </button>

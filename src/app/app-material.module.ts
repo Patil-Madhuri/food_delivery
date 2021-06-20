@@ -13,6 +13,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatSelectModule} from '@angular/material/select';
+import {MatRadioModule} from '@angular/material/radio';
 
 @NgModule({
     imports: [
@@ -30,7 +31,8 @@ import {MatSelectModule} from '@angular/material/select';
         FlexLayoutModule,
         MatTooltipModule,
         MatAutocompleteModule,
-        MatSelectModule
+        MatSelectModule,
+        MatRadioModule
     ],
     exports: [
         MatInputModule,
@@ -47,7 +49,8 @@ import {MatSelectModule} from '@angular/material/select';
         FlexLayoutModule,
         MatTooltipModule,
         MatAutocompleteModule,
-        MatSelectModule
+        MatSelectModule,
+        MatRadioModule
     ]
 })
 

@@ -15,10 +15,10 @@
             <div>
               <div fxLayout="row">
                 <h3>{{item.foodName}}</h3>
-                <div class="veg-type-div" *ngIf="item.type == 0" matTooltip="Veg">
+                <div class="veg-type-div" *ngIf="item.type == 1" matTooltip="Veg">
                   <mat-icon style="color: green;">circle</mat-icon>
                 </div>
-                <div class="nonveg-type-div" *ngIf="item.type == 1" matTooltip="Non-Veg">
+                <div class="nonveg-type-div" *ngIf="item.type == 2" matTooltip="Non-Veg">
                   <mat-icon style="color: red;">circle</mat-icon>
                 </div>
               </div>

@@ -16,7 +16,7 @@ export class ApiService implements HttpInterceptor {
     URL = environment.apiUrl;
 
     urls = {
-        getItems: 'items',
+        getItems: 'items/',
         addorder: 'order'
     };
     get currentDate() {
@@ -34,8 +34,8 @@ export class ApiService implements HttpInterceptor {
     }
 
 
-    getAllItems() {
-        return this.http.get(this.urls.getItems)
+    getAllItems(type) {
+        return this.http.get(this.urls.getItems + type)
     }
     addOrder(payload) {
         return this.http.post(this.urls.addorder, payload)
