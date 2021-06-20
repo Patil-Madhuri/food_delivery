@@ -7,6 +7,12 @@
     </mat-toolbar>
     <div class="main-div">
       <div class="btn-div">
+        <mat-radio-group [(ngModel)]="typeOffood" [ngModelOptions]="{standalone: true}"
+        (change)="getProducts($event.value)">
+        <mat-radio-button value="1" class="mr-8">Veg</mat-radio-button>
+        <mat-radio-button value="2">Non Veg</mat-radio-button>
+      </mat-radio-group>
+
         <button mat-button class="add-btn" (click)="addNew()">Add Order</button>
       </div>
       <div fxLayout="row row-wrap">

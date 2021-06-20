@@ -15,7 +15,7 @@ export class HomeComponent implements OnInit {
   isAdmin
   userName = ""
   jsonArray = []
-
+  typeOffood
   constructor(private router: Router,
     private apiService: ApiService,
     private snackBar: MatSnackBar, private dialog: MatDialog) {
@@ -52,10 +52,10 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getProducts();
+    this.getProducts(1);
   }
-  getProducts() {
-    this.apiService.getAllItems().subscribe(response => {
+  getProducts(type) {
+    this.apiService.getAllItems(type).subscribe(response => {
       this.jsonArray = response['response'];
     })
   }
