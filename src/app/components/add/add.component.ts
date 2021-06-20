@@ -112,7 +112,7 @@ export class AddComponent implements OnInit {
   //     'qty': ''
   //   },
   // ]
-  jsonArray = []
+  jsonArray;
   showOrderDetail = false
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, private apiService: ApiService,
     public dialogRef: MatDialogRef<AddComponent>, private fb: FormBuilder,
@@ -127,7 +127,7 @@ export class AddComponent implements OnInit {
   }
   getProducts(type) {
     this.apiService.getAllItems(type).subscribe(response => {
-      this.jsonArray = response['response'];
+      this.jsonArray = response;
       for (let index = 0; index < this.jsonArray.length; index++) {
         const element = this.jsonArray[index];
         element.qty = ''

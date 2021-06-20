@@ -13,7 +13,7 @@ import { environment } from '../../environments/environment.prod';
 })
 export class ApiService implements HttpInterceptor {
     // export class ApiService {
-    URL = environment.apiUrl;
+    url = environment.apiUrl;
 
     urls = {
         getItems: 'items/',
@@ -28,7 +28,7 @@ export class ApiService implements HttpInterceptor {
 
     intercept(req: HttpRequest<any>, next: HttpHandler) {
         const dubReq = req.clone({
-            url: req.url
+            url: this.url + req.url
         });
         return next.handle(dubReq);
     }

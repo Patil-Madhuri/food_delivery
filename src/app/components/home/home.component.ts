@@ -14,7 +14,7 @@ export class HomeComponent implements OnInit {
   currentDate = new Date();
   isAdmin
   userName = ""
-  jsonArray = []
+  jsonArray:any
   typeOffood
   constructor(private router: Router,
     private apiService: ApiService,
@@ -52,11 +52,11 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getProducts(1);
+    // this.getProducts(1);
   }
   getProducts(type) {
     this.apiService.getAllItems(type).subscribe(response => {
-      this.jsonArray = response['response'];
+      this.jsonArray = response
     })
   }
 
