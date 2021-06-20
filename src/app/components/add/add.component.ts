@@ -112,7 +112,7 @@ export class AddComponent implements OnInit {
   //     'qty': ''
   //   },
   // ]
-  jsonArray;
+  jsonArray:any;
   showOrderDetail = false
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, private apiService: ApiService,
     public dialogRef: MatDialogRef<AddComponent>, private fb: FormBuilder,
