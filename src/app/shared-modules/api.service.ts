@@ -17,7 +17,8 @@ export class ApiService implements HttpInterceptor {
 
     urls = {
         getItems: 'items/',
-        addorder: 'order'
+        addorder: 'order',
+        deleteItem: '/api/v1/items/'
     };
     get currentDate() {
         return new Date();
@@ -27,10 +28,17 @@ export class ApiService implements HttpInterceptor {
     ) { }
 
     intercept(req: HttpRequest<any>, next: HttpHandler) {
-        const dubReq = req.clone({
-            url: this.url + req.url
-        });
-        return next.handle(dubReq);
+        if (!req.url.includes('http://localhost:8080')) {
+            const dubReq = req.clone({
+                url: this.url + req.url
+            });
+            return next.handle(dubReq);
+        } else {
+            const dubReq = req.clone({
+                url: req.url
+            });
+            return next.handle(dubReq);
+        }
     }
 
 

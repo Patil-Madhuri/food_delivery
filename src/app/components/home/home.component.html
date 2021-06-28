@@ -8,7 +8,7 @@
     <div class="main-div">
       <div class="btn-div">
         <mat-radio-group [(ngModel)]="typeOffood" [ngModelOptions]="{standalone: true}"
-        (change)="getProducts($event.value)">
+        (change)="getProducts($event.value)" class="matradio">
         <mat-radio-button value="1" class="mr-8">Veg</mat-radio-button>
         <mat-radio-button value="2">Non Veg</mat-radio-button>
       </mat-radio-group>
@@ -30,6 +30,11 @@
               </div>
               <div class="colorGray">
                 Price : {{item.price}}
+              </div>
+              <div style="display: flex;justify-content: flex-end;">
+                <button mat-icon-button color="accent" (click)="deleteItem(item)">
+                  <mat-icon>delete</mat-icon>
+                </button>
               </div>
             </div>
           </mat-card>

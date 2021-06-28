@@ -4,6 +4,8 @@ import { ApiService } from 'src/app/shared-modules/api.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { AddComponent } from '../add/add.component';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',
@@ -17,7 +19,7 @@ export class HomeComponent implements OnInit {
   jsonArray:any
   typeOffood
   constructor(private router: Router,
-    private apiService: ApiService,
+    private apiService: ApiService,private http:HttpClient,
     private snackBar: MatSnackBar, private dialog: MatDialog) {
   }
 
@@ -62,6 +64,17 @@ export class HomeComponent implements OnInit {
 
   redirectTo(url) {
     this.router.navigate([url])
+  }
+  deleteItem(object){
+    this.http.delete(`http://localhost:8080/api/v1/items/${object.id}`).pipe(
+      map((response: Response) => {
+        this.snackBar.open("Product deleted successfully", '', {
+              duration: 2000,
+            });
+            this.getProducts(1)
+      }))
+      .subscribe();
+
   }
 
 }
